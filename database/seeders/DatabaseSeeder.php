@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\Project;
+use App\Models\Proposal;
 use App\Models\User;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
@@ -18,11 +19,14 @@ class DatabaseSeeder extends Seeder
     {
         User::factory(200)->create();
 
-        User::query()->inRandomOrder()->limit(10)->each(fn (User $user) => Project::factory()->create(['created_by' => $user->id]));
+        User::query()->inRandomOrder()->limit(10)->each(function (User $user) {
+            $project = Project::factory()->create([
+                'created_by' => $user->id]);
 
-
-
-//        Project::factory(20)->create();
-
+            Proposal::factory()->count(random_int(1, 45))->create([
+                'project_id' => $project->id
+            ]);
+        });
+;
     }
 }

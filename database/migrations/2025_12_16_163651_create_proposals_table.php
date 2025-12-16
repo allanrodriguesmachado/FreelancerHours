@@ -13,6 +13,9 @@ return new class extends Migration
     {
         Schema::create('proposals', function (Blueprint $table) {
             $table->id();
+            $table->string('email')->unique();
+            $table->unsignedSmallInteger('hours')->default(0);
+            $table->foreignId('project_id')->constrained('projects');
             $table->timestamps();
         });
     }
