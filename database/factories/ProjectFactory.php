@@ -26,12 +26,9 @@ class ProjectFactory extends Factory
                 'pending',
                 'closed',
             ]),
-            'tech_stack' => json_encode(
-                fake()->randomElements([
-                    'PHP', 'Hyperf', 'Laravel', 'Redis', 'Kafka',
-                    'Docker', 'Kubernetes', 'AWS SQS', 'Elasticsearch', 'Vue.js'
-                ], rand(2, 4))
-            ),
+            'tech_stack' =>   fake()->randomElements([
+                'js', 'nodejs', 'nextjs', 'react', 'vite',
+            ], rand(2, 4)),
             'created_by' => User::factory(),
         ];
     }

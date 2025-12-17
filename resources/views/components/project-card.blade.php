@@ -37,10 +37,7 @@
     </div>
 
     <div class="py-4 description">
-{{--        {!! $project->description !!}--}}
         {{ $project->description }}
-
-
     </div>
 
 
