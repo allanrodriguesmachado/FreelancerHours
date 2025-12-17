@@ -7,7 +7,7 @@
 
         <ul class="text-[#C3C3D1] flex items-center gap-4 text-[16px]">
             <li class="hover:underline cursor-pointer"><a>Anunciar um projeto</a></li>
-            <li class="hover:underline cursor-pointer"><a>Procurar um projeto</a></li>
+            <li class="hover:underline cursor-pointer"><a href="{{route('projects.index')}}">Procurar um projeto</a></li>
             <li class="hover:underline cursor-pointer"><a>Como funciona?</a></li>
         </ul>
 
