@@ -7,6 +7,7 @@ use App\Models\Proposal;
 use App\Models\User;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
 
 class DatabaseSeeder extends Seeder
 {
@@ -26,6 +27,13 @@ class DatabaseSeeder extends Seeder
             Proposal::factory()->count(random_int(1, 45))->create([
                 'project_id' => $project->id
             ]);
+
+            DB::update("
+                WITH RankedProposals AS (
+                    SELECT id, row_number() over(order by hours) AS p
+                    FROM proposals
+                )
+            ");
         });
 ;
     }

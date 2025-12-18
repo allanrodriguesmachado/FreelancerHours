@@ -3,6 +3,7 @@
 namespace App\Livewire\Proposals;
 
 use App\Models\Project;
+use App\Models\Proposal;
 use Illuminate\View\View;
 use Livewire\Attributes\Rule;
 use Livewire\Component;
@@ -35,12 +36,19 @@ class Create extends Component
             return;
         }
 
-        $this->project->proposals()->updateOrCreate(['email' => $this->email],
+        $project = $this->project->proposals()->updateOrCreate(['email' => $this->email],
             ['hours' => $this->hours,]
         );
+
+        $this->arrayPositions($project);
 
         $this->dispatch('proposal::created');
 
         $this->modal = false;
+    }
+
+    public function arrayPositions(Proposal $proposal): void
+    {
+
     }
 }
