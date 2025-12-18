@@ -20,7 +20,7 @@ class ProjectFactory extends Factory
         return [
             'title' => fake()->unique()->jobTitle(),
             'description' => fake()->randomHtml(),
-            'ends_at' => fake()->dateTime(),
+            'ends_at' => fake()->dateTimeBetween('now', 'last day of this month'),
             'status' => fake()->randomElement([
                 'open',
                 'pending',

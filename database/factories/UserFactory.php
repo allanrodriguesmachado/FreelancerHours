@@ -16,7 +16,7 @@ class UserFactory extends Factory
         return [
             'name' => fake()->name(),
             'email' => fake()->unique()->safeEmail(),
-            'avatar' => 'https://avatar.iran.liara.run/public',
+            'avatar' => 'https://ui-avatars.com/api/?name=' . urlencode(fake()->name) . '&background=random&color=fff',
             'rating' => fake()->randomElement([1, 2, 3, 4, 5]),
         ];
     }

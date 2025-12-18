@@ -50,7 +50,6 @@
         </div>
     </div>
 
-    <!-- Rodapé Claro -->
     <div class="px-6 py-4 bg-[#FAFAFA] border-t border-slate-100 flex items-center justify-between mt-auto">
         <div class="flex items-center gap-3">
             <x-ui.avatar src="{{ $project->author->avatar }}" class="w-7 h-7 rounded-full ring-1 ring-slate-200 grayscale opacity-80 group-hover:grayscale-0 group-hover:opacity-100 transition-all"/>
