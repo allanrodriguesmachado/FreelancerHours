@@ -2,4 +2,5 @@
     @foreach($this->projects as $project)
         <x-project-card-simple :$project />
     @endforeach
+
 </div>

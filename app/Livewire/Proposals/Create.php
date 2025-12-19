@@ -4,6 +4,8 @@ namespace App\Livewire\Proposals;
 
 use App\Models\Project;
 use App\Models\Proposal;
+use App\Notifications\NewProposal;
+use Illuminate\Support\Facades\DB;
 use Illuminate\View\View;
 use Livewire\Attributes\Rule;
 use Livewire\Component;
@@ -36,19 +38,27 @@ class Create extends Component
             return;
         }
 
-        $project = $this->project->proposals()->updateOrCreate(['email' => $this->email],
+        $this->project->proposals()->updateOrCreate(['email' => $this->email],
             ['hours' => $this->hours,]
         );
 
-        $this->arrayPositions($project);
+//        $this->project->author->notify(new NewProposal($this->project));
 
         $this->dispatch('proposal::created');
 
         $this->modal = false;
     }
 
-    public function arrayPositions(Proposal $proposal): void
+    public function arrangePosition(Proposal $proposal): void
     {
+        $query = DB::select("SELECT *, row_number() over(order by hours asc) AS newPosition FROM proposals WHERE project_id = :project ", ['project' => $proposal->project_id]);
 
+        $position = collect($query)->where('id', '=', $proposal->id);
+        $otherProposal = collect($position)->where('position', '=',$position->newPosition)->first();
+
+        if ($otherProposal) {
+            $proposal->update(['position_status' => 'up']);
+            Proposal::query()->where('id', '=', $otherProposal->id)->update(['position_status' => 'down']);
+        }
     }
 }

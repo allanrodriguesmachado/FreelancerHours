@@ -32,8 +32,13 @@ class DatabaseSeeder extends Seeder
                 WITH RankedProposals AS (
                     SELECT id, row_number() over(order by hours) AS p
                     FROM proposals
+                    Where project_id = :project
                 )
-            ");
+
+                UPDATE proposals
+                SET position = (SELECT p from RankedProposals WHERE proposals.id = RankedProposals.id)
+                WHERE project_id = :project
+            ", ['project' => $project->id]);
         });
 ;
     }
