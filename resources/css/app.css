@@ -30,3 +30,6 @@ input[type=number] {
     -moz-appearance: textfield;
     appearance: textfield;
 }
+
+/* input.css */
+@custom-variant dark (&:where(.dark, .dark *));

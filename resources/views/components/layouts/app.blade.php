@@ -7,15 +7,23 @@
     <title>{{ $title ?? 'Freelancer Hours' }}</title>
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 
-    <!-- Adicionei antialiased para fontes mais nítidas -->
 </head>
-<body class="bg-[#FFF9F5] flex flex-col min-h-full text-slate-600 antialiased selection:bg-orange-400 selection:text-white">
+<body class="bg-[#FFF9F5] dark:bg-gray-950">
 
 <x-ui.navbar/>
 
 <main class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 w-full py-10">
     {{ $slot }}
 </main>
+
+<script>
+    if (localStorage.getItem('color-theme') === 'dark' || (!('color-theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+        document.documentElement.classList.add('dark');
+    } else {
+        document.documentElement.classList.remove('dark')
+    }
+</script>
+
 
 </body>
 </html>
