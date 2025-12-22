@@ -42,7 +42,7 @@ class Create extends Component
             ['hours' => $this->hours,]
         );
 
-//        $this->project->author->notify(new NewProposal($this->project));
+        $this->project->author->notify(new NewProposal($this->project));
 
         $this->dispatch('proposal::created');
 
